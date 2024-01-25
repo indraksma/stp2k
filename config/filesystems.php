@@ -17,6 +17,19 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Default Cloud Filesystem Disk
+    |--------------------------------------------------------------------------
+    |
+    | Many applications store files both locally and in the cloud. For this
+    | reason, you may specify a default "cloud" driver here. This driver
+    | will be bound as the Cloud disk implementation in the container.
+    |
+    */
+
+    'cloud' => env('FILESYSTEM_CLOUD', 's3'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Filesystem Disks
     |--------------------------------------------------------------------------
     |
@@ -50,7 +63,6 @@ return [
             'bucket' => env('AWS_BUCKET'),
             'url' => env('AWS_URL'),
             'endpoint' => env('AWS_ENDPOINT'),
-            'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
         ],
 
     ],
@@ -67,7 +79,12 @@ return [
     */
 
     'links' => [
-        public_path('storage') => storage_path('app/public'),
+        public_path('storage')      => storage_path('app/public'),
+        public_path('asset')        => storage_path('app/public/asset'),
+        public_path('asseticon')    => storage_path('app/public/asset/icon'),
+        public_path('assetimage')   => storage_path('app/public/asset/image'),
+        public_path('assetvideo')   => storage_path('app/public/asset/video'),
+        public_path('assetaudio')   => storage_path('app/public/asset/audio'),
     ],
 
 ];

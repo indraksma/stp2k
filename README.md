@@ -1,64 +1,99 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Laravel + Fortify + AdminLTE 3
+
+Repository ini merupakan sebuah repository sederhana dari Framework Laravel 8 yang bagian autentikasinya sedikit di kustomasi menggunakan Laravel Fortify, sehingga bisa di integrasikan tampilannya menggunakan AdminLTE 3. Didalam repository ini sudah tersedia contoh CRUD sederhana menggunakan Livewire yang bisa kamu kembangkan sendiri sesuai dengan kebutuhan yang kamu miliki. Selain itu, repository ini juga menggunakan Turbolink pada bagian panel-nya, sehingga bisa sedikit 'terasa' seperti aplikasi SPA.
+
+## Cara menggunakan
+
+Pertama-tama, silahkan download atau clone repo ini.
+
+```bash
+$ git clone https://github.com/azharfrp/FortifyLTE.git
+```
+
+Kemudian install dependency yang dibutuhkan.
+
+```bash
+# membuat file .env baru dari file .env.example - Untuk Linux
+$ cp .env.example .env
+
+# membuat file .env baru dari file .env.example - Untuk Windows
+$ copy .env.example .env
+
+# membuat app key
+$ php artisan key:generate
+
+# lakukan migrasi
+$ php artisan migrate
+
+# lakukan link storage
+$ php artisan storage:link
+```
+
+Setelah semuanya selesai, silahkan coba akses repo ini via server development Laravel.
+
+```bash
+php artisan serve
+```
+
+Selain itu kamu juga bisa mengakses repo ini menggunakan alat bantu lainnya.
+
+## Screen Shoot
 
 <p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+    <img src="https://telegra.ph/file/f2f7018164354ec4a9d4f.png" width="80%" height="auto">
+    <img src="https://telegra.ph/file/b674fe27699b0b1886a8a.png" width="80%" height="auto">
+    <img src="https://telegra.ph/file/ab674fa4bc6ee83fcbb96.png" width="80%" height="auto">
+    <img src="https://telegra.ph/file/a0b7b777d9b01bdb8e3e3.png" width="80%" height="auto">
+    <img src="https://telegra.ph/file/41550dc3b3b69209137cf.png" width="80%" height="auto">
+    <img src="https://telegra.ph/file/b95bd4bde4962357c3e6d.png" width="80%" height="auto">
+    <img src="https://telegra.ph/file/b8f1345b69014c25220b4.png" width="80%" height="auto">
+    <img src="https://telegra.ph/file/c09be9aae5a1a86656f7f.png" width="80%" height="auto">
+    <img src="https://telegra.ph/file/9c3e697234a7a5860eee8.png" width="80%" height="auto">
+    <img src="https://telegra.ph/file/e2c2bcddc639597d922db.png" width="80%" height="auto">
+    <img src="https://telegra.ph/file/0c49323475b8569765da6.png" width="80%" height="auto">
 </p>
 
-## About Laravel
+## Fitur
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Secara garis besar, repo ini menyediakan beberapa fitur dasar, yaitu:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- Tampilan panel AdminLTE v3.
+- Aksi CRUD menggunakan Livewire.
+- Alert setelah melakukan aksi CRUD.
+- List dan pencarian data dengan bantuan Eloquent ORM.
+- Aplikasi 'SPA' menggunakan bantuan Turbolink.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Repo ini cocok untuk digunakan sebagai bahan pembelajaran bagi pengguna Laravel yang ingin mendapatkan fitur-fitur diatas, namun merasa kesulitan untuk mendapatkan hasil sederhana seperti yang ditawarkan oleh repo ini.
 
-## Learning Laravel
+## Dokumentasi
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Repository ini hanyalah sedikit pengembangan sederhana dari:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- [AdminLTE](https://github.com/ColorlibHQ/AdminLTE)
+- [Laravel 8](https://laravel.com/docs/8.x)
+- [Laravel Fortify](https://github.com/laravel/fortify)
+- [Laravel Livewire](https://laravel-livewire.com/docs)
+- [Livewire Alert](https://github.com/jantinnerezo/livewire-alert)
+- [Turbolinks](https://github.com/turbolinks/turbolinks)
+- [Laravel Permission](https://github.com/spatie/laravel-permission)
 
-## Laravel Sponsors
+Dan lain-lain. Untuk dokumentasi lebih lanjut, silahkan mengacu pada dokumentasi dari masing-masing framework/package tersebut. Terimakasih.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+## Siapa Saya
 
-### Premium Partners
+Nama saya Azhar Fahrurazi, seorang penulis dan juga programmer amatiran dari [Blog Gampangan](http://www.gampangan.com). Mohon maaf jika repository ini tidak/belum sesuai dengan kebutuhan yang kamu miliki.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+## Apa yang Baru?
 
-## Contributing
+v0.2
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- Support Role
+- Proses manajemen berkas ditangani oleh File Storage
 
-## Code of Conduct
+Beberapa perubahan mungkin tidak dicantumkan disini.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Support
 
-## Security Vulnerabilities
+Kontribusi apa pun yang kamu bisa lakukan sangatlah diharapkan dan juga sangatlah dihargai untuk mengembangkan repo sederhana ini, agar kedepannya semakin banyak orang yang bisa memulai pembelajarannya dari tingkat yang lebih tinggi.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Terimakasih.

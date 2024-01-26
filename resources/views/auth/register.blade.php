@@ -22,6 +22,19 @@
                     </div>
                 @enderror
                 <div class="input-group mb-3">
+                    <input type="text" name="nip" value="{{ old('nip') }}" class="form-control @error('nip') is-invalid @enderror" placeholder="NIP" required="required">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-user"></span>
+                        </div>
+                    </div>
+                </div>
+                @error('nip')
+                    <div class="alert alert-danger">
+                        <span>{{ $message }}</span>
+                    </div>
+                @enderror
+                <div class="input-group mb-3">
                     <input type="email" name="email" value="{{ old('email') }}" class="form-control @error('email') is-invalid @enderror" placeholder="Email" required="required">
                     <div class="input-group-append">
                         <div class="input-group-text">

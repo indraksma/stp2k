@@ -9368,7 +9368,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "doctrine/dbal": 5
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

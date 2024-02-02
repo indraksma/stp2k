@@ -11,17 +11,19 @@ use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Illuminate\Support\Facades\Storage;
 
 use App\Imports\SiswaImport;
+use App\Models\Pelanggaran;
+use Livewire\WithPagination;
 use Maatwebsite\Excel\Facades\Excel;
 
 class Siswa extends Component
 {
-    use LivewireAlert, WithFileUploads;
+    use LivewireAlert, WithFileUploads, WithPagination;
 
-    public $nama, $nis, $jk, $kelas_id, $siswa_id, $tempat_lahir, $tanggal_lahir;
+    public $nama, $nis, $jk, $kelas_id, $siswa_id, $tempat_lahir, $tanggal_lahir, $riwayatsiswa, $riwayatpoin;
     public $template_excel;
     public $openModal = false;
     public $iteration = 0;
-    protected $listeners = ['edit', 'delete'];
+    protected $listeners = ['edit', 'delete', 'detail'];
 
     public function render()
     {
@@ -78,6 +80,7 @@ class Siswa extends Component
     public function closeModal()
     {
         $this->resetInputFields();
+        $this->reset(['riwayatsiswa', 'riwayatpoin']);
         $this->openModal = false;
     }
 
@@ -117,5 +120,10 @@ class Siswa extends Component
 
         $this->alert('warning', 'Data berhasil dihapus!');
         $this->emit('refreshSiswaTable');
+    }
+
+    public function detail($id)
+    {
+        $this->siswa_id = $id;
     }
 }

@@ -102,8 +102,31 @@
                     </div>
                 </form>
             </div>
-
         </div>
-
     </div>
+
+    {{-- Modal Riwayat --}}
+    <div wire:ignore.self class="modal fade" id="modalRiwayat" aria-modal="true" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary">
+                    <h4 class="modal-title">Detail Siswa</h4>
+                    <button type="button" class="close" wire:click="closeModal" data-dismiss="modal"
+                        aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    @if ($siswa_id)
+                        <livewire:detail-siswa :idsiswa="$siswa_id">
+                    @endif
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" wire:click="closeModal" class="btn btn-default"
+                        data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>

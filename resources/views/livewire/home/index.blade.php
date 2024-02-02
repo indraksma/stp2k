@@ -1,9 +1,9 @@
 @section('title', 'Dashboard')
 @section('titlebutton')
-    <a href="#"><button class="btn btn-primary btn-block"><i class="fas fa-plus"></i>&nbsp;Tambah
+    <a href="{{ route('addpoin') }}"><button class="btn btn-primary btn-block"><i class="fas fa-plus"></i>&nbsp;Tambah
             Pelanggaran</button></a>
 @endsection
-@section('content')
+<div>
     <div class="row">
         <div class="col-md-6">
             <div class="card card-primary card-outline">
@@ -23,33 +23,22 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="bg-warning">
-                                    <td>1.</td>
-                                    <td>25/01/2024</td>
-                                    <td>Muhammad Fariz</td>
-                                    <td>2024 TE 1</td>
-                                    <td>Kedisiplinan</td>
-                                    <td>B1a</td>
-                                    <td><span class="badge bg-secondary">2</span></td>
-                                </tr>
-                                <tr>
-                                    <td>2.</td>
-                                    <td>25/01/2024</td>
-                                    <td>Arifin</td>
-                                    <td>2024 TE 1</td>
-                                    <td>Kedisiplinan</td>
-                                    <td>B1b</td>
-                                    <td><span class="badge bg-secondary">2</span></td>
-                                </tr>
-                                <tr>
-                                    <td>3.</td>
-                                    <td>25/01/2024</td>
-                                    <td>Yoyon</td>
-                                    <td>2024 TE 2</td>
-                                    <td>Kelakukan</td>
-                                    <td>C2</td>
-                                    <td><span class="badge bg-secondary">5</span></td>
-                                </tr>
+                                @if ($riwayat)
+                                    @php $no = 1; @endphp
+                                    @foreach ($riwayat as $datar)
+                                        <tr>
+                                            <td>{{ $no }}</td>
+                                            <td>{{ date('d-m-Y', strtotime($datar->tanggal)) }}</td>
+                                            <td>{{ $datar->siswa->nama }}</td>
+                                            <td>{{ $datar->siswa->kelas->nama_kelas }}</td>
+                                            <td>{{ $datar->kode_pelanggaran->jenis_pelanggaran->jenis_pelanggaran }}
+                                            </td>
+                                            <td>{{ $datar->kode_pelanggaran->kode_pelanggaran }}</td>
+                                            <td><span class="badge bg-secondary">{{ $datar->poin }}</span></td>
+                                        </tr>
+                                        @php $no++; @endphp
+                                    @endforeach
+                                @endif
                             </tbody>
                         </table>
                     </div>
@@ -73,30 +62,20 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1.</td>
-                                    <td>Muhammad Fariz</td>
-                                    <td>2024 TE 1</td>
-                                    <td>
-                                        <h4><span class="badge bg-warning">50</span></h4>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2.</td>
-                                    <td>Arifin</td>
-                                    <td>2024 TE 1</td>
-                                    <td>
-                                        <h4><span class="badge bg-warning">25</span></h4>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>3.</td>
-                                    <td>Yoyon</td>
-                                    <td>2024 TE 2</td>
-                                    <td>
-                                        <h4><span class="badge bg-warning">15</span></h4>
-                                    </td>
-                                </tr>
+                                @if ($siswa)
+                                    @php $i = 1; @endphp
+                                    @foreach ($siswa as $datas)
+                                        <tr>
+                                            <td>{{ $i }}</td>
+                                            <td>{{ $datas->nama }}</td>
+                                            <td>{{ $datas->nama_kelas }}</td>
+                                            <td>
+                                                <h4><span class="badge bg-warning">{{ $datas->poin_siswa }}</span></h4>
+                                            </td>
+                                        </tr>
+                                        @php $i++; @endphp
+                                    @endforeach
+                                @endif
                             </tbody>
                         </table>
                     </div>
@@ -104,4 +83,4 @@
             </div>
         </div>
     </div>
-@endsection
+</div>

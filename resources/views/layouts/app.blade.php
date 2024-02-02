@@ -27,6 +27,8 @@
     <!-- Alpine JS -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.0/dist/cdn.min.js"></script>
 
+    @stack('headscript')
+
     <!-- Livewire -->
     <livewire:styles />
 </head>
@@ -74,15 +76,15 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('siswa') }}"
-                                class="{{ request()->routeIs('siswa') ? 'nav-link active' : 'nav-link' }}">
+                            <a href="{{ route('datapelanggaran') }}"
+                                class="{{ request()->routeIs('datapelanggaran') ? 'nav-link active' : 'nav-link' }}">
                                 <i class="nav-icon fas fa-user-times"></i>
                                 <p>Data Pelanggaran</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('siswa') }}"
-                                class="{{ request()->routeIs('siswa') ? 'nav-link active' : 'nav-link' }}">
+                            <a href="{{ route('kodepelanggaran') }}"
+                                class="{{ request()->routeIs('kodepelanggaran') ? 'nav-link active' : 'nav-link' }}">
                                 <i class="nav-icon fas fa-file-alt"></i>
                                 <p>Kode Pelanggaran</p>
                             </a>
@@ -96,9 +98,9 @@
                         </li>
                         @if (Auth::user()->hasRole('admin'))
                             <li
-                                class="{{ request()->routeIs(['users', 'ta', 'jurusan', 'kelas']) ? 'nav-item has-treeview menu-open' : 'nav-item' }}">
+                                class="{{ request()->routeIs(['users', 'ta', 'jurusan', 'kelas', 'pelanggaran']) ? 'nav-item has-treeview menu-open' : 'nav-item' }}">
                                 <a href="#"
-                                    class="{{ request()->routeIs(['users', 'ta', 'jurusan', 'kelas']) ? 'nav-link active' : 'nav-link' }}">
+                                    class="{{ request()->routeIs(['users', 'ta', 'jurusan', 'kelas', 'pelanggaran']) ? 'nav-link active' : 'nav-link' }}">
                                     <i class="nav-icon fas fa-cog"></i>
                                     <p>Setting <i class="right fas fa-angle-left"></i></p>
                                 </a>
@@ -134,7 +136,7 @@
                                     <li class="nav-item">
                                         <a href="{{ route('pelanggaran') }}"
                                             class="{{ request()->routeIs('pelanggaran') ? 'nav-link active' : 'nav-link' }}">
-                                            <i class="nav-icon fas fa-house-user"></i>
+                                            <i class="nav-icon fab fa-readme"></i>
                                             <p>Pelanggaran</p>
                                         </a>
                                     </li>

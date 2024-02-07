@@ -145,7 +145,7 @@
                                     <li class="nav-item">
                                         <a href="{{ route('pelanggaran') }}"
                                             class="{{ request()->routeIs('pelanggaran') ? 'nav-link active' : 'nav-link' }}">
-                                            <i class="nav-icon fab fa-readme"></i>
+                                            <i class="nav-icon fas fa-book"></i>
                                             <p>Pelanggaran</p>
                                         </a>
                                     </li>

@@ -42,8 +42,8 @@
                             </tbody>
                         </table>
                     </div>
-                    <span class="badge bg-warning">Siswa Memiliki Poin Lebih dari 50</span>
-                    <span class="badge bg-danger">Siswa Memiliki Poin Lebih dari 100</span>
+                    {{-- <span class="badge bg-warning">Siswa Memiliki Poin Lebih dari 50</span>
+                    <span class="badge bg-danger">Siswa Memiliki Poin Lebih dari 100</span> --}}
                 </div>
             </div>
         </div>

@@ -18,10 +18,9 @@
                             <table class="table table-striped table-bordered mb-2">
                                 <thead>
                                     <tr>
-                                        <th style="width: 10%">Kode</th>
-                                        <th style="width: 20%">Jenis</th>
-                                        <th style="width: 60%">Pelanggaran</th>
-                                        <th style="width: 10%">Poin</th>
+                                        <th style="width: 15%">Kode</th>
+                                        <th style="width: 65%">Pelanggaran</th>
+                                        <th style="width: 20%">Poin</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -29,7 +28,6 @@
                                         @foreach ($kp[$data->id] as $kodepel[$i])
                                             <tr>
                                                 <td>{{ $kodepel[$i]->kode_pelanggaran }}</td>
-                                                <td>{{ $kodepel[$i]->jenis_pelanggaran->jenis_pelanggaran }}</td>
                                                 <td>{{ $kodepel[$i]->nama_pelanggaran }}</td>
                                                 <td>{{ $kodepel[$i]->poin }}</td>
                                             </tr>

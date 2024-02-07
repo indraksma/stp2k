@@ -14,14 +14,11 @@ class Pelanggaran extends Component
 
     public $jenis_pelanggaran, $kode_pelanggaran, $nama_pelanggaran, $poin, $jp_id, $delete_id, $jenis_hapus, $kp_id, $jp_list;
 
+    protected $listeners = ['editModalJP' => 'editModalJP', 'deleteId' => 'deleteId', 'editModalKP'  => 'editModalKP'];
+
     public function render()
     {
-        $jp = JenisPelanggaran::paginate(10);
-        $kp = KodePelanggaran::orderBy('kode_pelanggaran', 'ASC')->orderBy('jenis_pelanggaran_id', 'ASC')->paginate(10);
-        return view('livewire.setting.pelanggaran', [
-            'jp' => $jp,
-            'kp' => $kp,
-        ])->extends('layouts.app');
+        return view('livewire.setting.pelanggaran')->extends('layouts.app');
     }
 
     private function resetForm()
@@ -81,6 +78,7 @@ class Pelanggaran extends Component
 
         $this->alert('success', $this->jp_id ? 'Data berhasil diubah!' : 'Data berhasil ditambahkan!');
         $this->resetForm();
+        $this->emit('refreshJpTable');
         $this->dispatchBrowserEvent('storedData');
     }
 
@@ -108,6 +106,7 @@ class Pelanggaran extends Component
 
         $this->alert('success', $this->kp_id ? 'Data berhasil diubah!' : 'Data berhasil ditambahkan!');
         $this->resetForm();
+        $this->emit('refreshKpTable');
         $this->dispatchBrowserEvent('storedData');
     }
 
@@ -122,12 +121,13 @@ class Pelanggaran extends Component
         $jenis = $this->jenis_hapus;
         if ($jenis == 1) {
             JenisPelanggaran::where('id', $this->delete_id)->delete();
+            $this->emit('refreshJpTable');
         } elseif ($jenis == 2) {
             KodePelanggaran::where('id', $this->delete_id)->delete();
+            $this->emit('refreshKpTable');
         }
 
         $this->reset(['delete_id', 'jenis_hapus']);
-
         $this->alert('success', 'Data berhasil dihapus!');
     }
 }

@@ -96,6 +96,15 @@
                                 <p>Data Siswa</p>
                             </a>
                         </li>
+                        @if (Auth::user()->hasRole('admin') || Auth::user()->hasRole('kesiswaan'))
+                            <li class="nav-item">
+                                <a href="{{ route('penguranganpoin') }}"
+                                    class="{{ request()->routeIs('penguranganpoin') ? 'nav-link active' : 'nav-link' }}">
+                                    <i class="nav-icon fas fa-minus"></i>
+                                    <p>Pengurangan Poin</p>
+                                </a>
+                            </li>
+                        @endif
                         @if (Auth::user()->hasRole('admin'))
                             <li
                                 class="{{ request()->routeIs(['users', 'ta', 'jurusan', 'kelas', 'pelanggaran']) ? 'nav-item has-treeview menu-open' : 'nav-item' }}">

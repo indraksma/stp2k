@@ -36,6 +36,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('datapelanggaran', App\Http\Livewire\DataPelanggaran::class)->name('datapelanggaran');
     Route::get('kodepelanggaran', App\Http\Livewire\KodePelanggaran::class)->name('kodepelanggaran');
 });
+Route::middleware(['auth', 'role:admin|kesiswaan'])->group(function () {
+    Route::get('penguranganpoin', App\Http\Livewire\PenguranganPoin::class)->name('penguranganpoin');
+});
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('siswa', App\Http\Livewire\Siswa::class)->name('siswa');

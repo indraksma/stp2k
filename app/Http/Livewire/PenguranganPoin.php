@@ -144,6 +144,21 @@ class PenguranganPoin extends Component
         ]);
 
         $this->alert('success', $this->siswa_id ? 'Data berhasil diubah!' : 'Data berhasil ditambahkan!');
+        $this->showbtn = false;
         $this->closeModal();
+    }
+
+    public function delete($id)
+    {
+        $sql = ModelsPenguranganPoin::where('id', $id)->firstOrFail();
+
+        $siswa = Siswa::where('id', $sql->siswa_id)->first();
+        $poinsiswa = intval($siswa->poin_siswa) + intval($sql->poin);
+        $siswa->poin_siswa = $poinsiswa;
+        $siswa->update();
+
+        $sql->find($id)->delete();
+
+        $this->alert('warning', 'Data berhasil dihapus!');
     }
 }

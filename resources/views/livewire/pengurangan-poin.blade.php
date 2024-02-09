@@ -18,12 +18,13 @@
                                     <th>Nama Siswa</th>
                                     <th>Keterangan</th>
                                     <th>Poin Pengurang</th>
+                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @if ($data->isEmpty())
                                     <tr>
-                                        <td colspan="5" class="text-center">Belum ada data</td>
+                                        <td colspan="6" class="text-center">Belum ada data</td>
                                     </tr>
                                 @else
                                     @php $i = 1; @endphp
@@ -34,6 +35,12 @@
                                             <td>{{ $d->siswa->nama }}</td>
                                             <td>{{ $d->keterangan }}</td>
                                             <td>{{ $d->poin }}</td>
+                                            <td>
+                                                <button wire:click="delete({{ $d->id }})"
+                                                    class="btn btn-sm btn-danger"
+                                                    onclick="confirm('Are you sure to delete?') || event.stopImmediatePropagation()"><i
+                                                        class="fas fa-trash"></i></button>
+                                            </td>
                                         </tr>
                                         @php $i++; @endphp
                                     @endforeach

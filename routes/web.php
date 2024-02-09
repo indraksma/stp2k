@@ -38,6 +38,7 @@ Route::middleware(['auth'])->group(function () {
 });
 Route::middleware(['auth', 'role:admin|kesiswaan'])->group(function () {
     Route::get('penguranganpoin', App\Http\Livewire\PenguranganPoin::class)->name('penguranganpoin');
+    Route::get('kenaikankelas', App\Http\Livewire\KenaikanKelas::class)->name('kenaikankelas');
 });
 
 Route::middleware(['auth', 'role:admin'])->group(function () {

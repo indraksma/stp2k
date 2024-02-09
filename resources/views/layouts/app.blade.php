@@ -107,9 +107,9 @@
                         @endif
                         @if (Auth::user()->hasRole('admin'))
                             <li
-                                class="{{ request()->routeIs(['users', 'ta', 'jurusan', 'kelas', 'pelanggaran']) ? 'nav-item has-treeview menu-open' : 'nav-item' }}">
+                                class="{{ request()->routeIs(['users', 'ta', 'jurusan', 'kelas', 'pelanggaran', 'kenaikankelas']) ? 'nav-item has-treeview menu-open' : 'nav-item' }}">
                                 <a href="#"
-                                    class="{{ request()->routeIs(['users', 'ta', 'jurusan', 'kelas', 'pelanggaran']) ? 'nav-link active' : 'nav-link' }}">
+                                    class="{{ request()->routeIs(['users', 'ta', 'jurusan', 'kelas', 'pelanggaran', 'kenaikankelas']) ? 'nav-link active' : 'nav-link' }}">
                                     <i class="nav-icon fas fa-cog"></i>
                                     <p>Setting <i class="right fas fa-angle-left"></i></p>
                                 </a>
@@ -147,6 +147,13 @@
                                             class="{{ request()->routeIs('pelanggaran') ? 'nav-link active' : 'nav-link' }}">
                                             <i class="nav-icon fas fa-book"></i>
                                             <p>Pelanggaran</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('kenaikankelas') }}"
+                                            class="{{ request()->routeIs('kenaikankelas') ? 'nav-link active' : 'nav-link' }}">
+                                            <i class="nav-icon fas fa-graduation-cap"></i>
+                                            <p>Kenaikan Kelas</p>
                                         </a>
                                     </li>
                                 </ul>

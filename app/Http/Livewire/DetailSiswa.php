@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Pelanggaran;
+use App\Models\PenguranganPoin;
 use App\Models\Siswa;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -19,9 +20,11 @@ class DetailSiswa extends Component
     {
         $riwayatsiswa = Siswa::where('id', $this->idsiswa)->first();
         $riwayatpoin = Pelanggaran::where('siswa_id', $this->idsiswa)->paginate(10);
+        $riwayatkurang = PenguranganPoin::where('siswa_id', $this->idsiswa)->paginate(10);
         return view('livewire.detail-siswa', [
             'riwayatsiswa' => $riwayatsiswa,
             'riwayatpoin' => $riwayatpoin,
+            'riwayatkurang' => $riwayatkurang,
         ]);
     }
 }

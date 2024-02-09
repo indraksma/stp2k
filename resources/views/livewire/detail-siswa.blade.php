@@ -66,4 +66,36 @@
             </div>
         </div>
     </div>
+    @if ($riwayatkurang && $riwayatkurang->isNotEmpty())
+        <h4 class="modal-title mb-3 bg-warning text-center mt-2">Riwayat Pengurangan Poin</h4>
+        <div class="table-responsive p-0">
+            <table class="table table-hover text-nowrap">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Tanggal</th>
+                        <th>Keterangan</th>
+                        <th>Poin Pengurang</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @php $nox = 1; @endphp
+                    @foreach ($riwayatkurang as $rk)
+                        <tr>
+                            <td>{{ $nox }}</td>
+                            <td>{{ date('d-m-Y', strtotime($rk->tanggal)) }}</td>
+                            <td>{{ $rk->keterangan }}</td>
+                            <td><span class="badge badge-secondary">{{ $rk->poin }}</span></td>
+                        </tr>
+                        @php $nox++; @endphp
+                    @endforeach
+                </tbody>
+            </table>
+            <div class="col-sm-12 col-md-12">
+                <div class="dataTables_paginate paging_simple_numbers">
+                    {{ $riwayatkurang->links() }}
+                </div>
+            </div>
+        </div>
+    @endif
 </div>

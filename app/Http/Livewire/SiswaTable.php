@@ -41,7 +41,7 @@ class SiswaTable extends DataTableComponent
                 ->searchable(),
             Column::make('Actions')
                 ->label(function ($row, Column $column) {
-                    return view('livewire.action.edit-delete', ['data' => $row]);
+                    return view('livewire.action.siswa', ['data' => $row]);
                 }),
             // ->attributes(function ($row) {
             //     return [

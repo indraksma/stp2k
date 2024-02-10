@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 
 class SsoController extends Controller
@@ -53,7 +52,7 @@ class SsoController extends Controller
 ?>
             <script type="text/javascript">
                 <!--
-                window.location = "https://user.smkn1bawang.sch.id/sso/link/jurnalpkl.smkn1bawang.sch.id";
+                window.location = "https://user.smkn1bawang.sch.id/sso/link/sipoin.smkn1bawang.sch.id";
                 //
                 -->
             </script>
@@ -74,7 +73,7 @@ class SsoController extends Controller
             if (strlen($_SERVER['QUERY_STRING']) > 0) {
 
             ?>
-                window.location.replace("http://jurnalpkl.smkn1bawang.sch.id/sso?<?php echo $_SERVER['QUERY_STRING']; ?>");
+                window.location.replace("https://sipoin.smkn1bawang.sch.id/sso?<?php echo $_SERVER['QUERY_STRING']; ?>");
             <?php
 
             } else {
@@ -93,11 +92,11 @@ class SsoController extends Controller
         $secret = "20mmIx" . $exodus . "uXciG4JH";
         $method = "AES-128-ECB";
 
-        $rahasia = "1647c1315acf78489e0c636537ec41ca";
-        $kunci = "lRvFDbR2ntwnk3l6c2RO";
+        $rahasia = "ebdce3a7da1a048a859f3e0202db526c";
+        $kunci = "SD9zDxRih5sHAv076MfE";
         $sso_server = "https://user.smkn1bawang.sch.id/sso";
-        $domain = "jurnalpkl.smkn1bawang.sch.id";
-        $sso_client = "http://" . $domain . "/sso";
+        $domain = "sipoin.smkn1bawang.sch.id";
+        $sso_client = "https://" . $domain . "/sso";
         $sso_referer = $domain . "/sso";
         $arr = array(
             'domain' => $domain,

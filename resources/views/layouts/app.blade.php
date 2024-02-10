@@ -45,8 +45,9 @@
             </ul>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a href="{{ route('logout') }}" class="nav-link"
-                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                    {{-- <a href="{{ route('logout') }}" class="nav-link"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a> --}}
+                    <a href="{{ route('logout') }}" class="nav-link">Logout</a>
                 </li>
             </ul>
         </nav>

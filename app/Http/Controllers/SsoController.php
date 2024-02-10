@@ -45,7 +45,7 @@ class SsoController extends Controller
                 if (Auth::loginUsingId($user_id, true)) {
                     return redirect()->route('home');
                 } else {
-                    return redirect()->route('login')->with('message', 'User tidak terdaftar dalam SIJUPRAK, silahkan hubungi admin kurikulum.');
+                    return redirect()->route('login')->with('message', 'User tidak terdaftar dalam SIPOIN, silahkan hubungi admin kesiswaan.');
                 }
             }
         } else {

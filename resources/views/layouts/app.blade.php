@@ -10,7 +10,7 @@
     <link rel="icon" type="image" href="{{ asset('favicon.png') }}">
 
     <!-- Title -->
-    <title>@yield('title', 'STP2K SMKN 1 Bawang') | {{ config('app.name', 'STP2K SMKN 1 Bawang') }}</title>
+    <title>@yield('title', 'SIPOIN SMKN 1 Bawang') | {{ config('app.name', 'SIPOIN SMKN 1 Bawang') }}</title>
 
     <!-- Fontawesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" rel="stylesheet">
@@ -53,7 +53,7 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <a href="{{ url('/') }}" class="brand-link">
                 <img src="{{ asset('logo.png') }}" class="brand-image">
-                <span class="brand-text">{{ config('app.name', 'STP2K') }}</span>
+                <span class="brand-text">{{ config('app.name', 'SIPOIN') }}</span>
             </a>
             <div class="sidebar">
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">

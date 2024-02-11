@@ -30,6 +30,7 @@ Route::get('ssoout', [SsoController::class, 'logout'])->name('ssoout');
 Route::get('logout', [SsoController::class, 'logout'])->name('logout');
 
 Route::middleware(['auth'])->group(function () {
+    Route::get('siswa', App\Http\Livewire\Siswa::class)->name('siswa');
     Route::get('poin', App\Http\Livewire\Poin::class)->name('poin');
     Route::get('addpoin', App\Http\Livewire\AddPoin::class)->name('addpoin');
     Route::get('editpoin/{id}', App\Http\Livewire\EditPoin::class)->name('editpoin');
@@ -42,7 +43,6 @@ Route::middleware(['auth', 'role:admin|kesiswaan'])->group(function () {
 });
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('siswa', App\Http\Livewire\Siswa::class)->name('siswa');
     Route::get('users', App\Http\Livewire\Setting\User::class)->name('users');
     //Route::post('import-user', [UserController::class, 'import'])->name('import-user');
     Route::get('ta', App\Http\Livewire\Setting\TahunAjaran::class)->name('ta');

@@ -15,7 +15,7 @@ class PelanggaranTable extends DataTableComponent
     public function configure(): void
     {
         $this->setPrimaryKey('id');
-        $this->setAdditionalSelects(['pelanggarans.id']);
+        $this->setAdditionalSelects(['pelanggarans.id', 'pelanggarans.user_id']);
         $this->setDefaultSort('tanggal', 'desc');
     }
 

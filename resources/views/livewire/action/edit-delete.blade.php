@@ -1,4 +1,5 @@
 <div class="d-flex justify-content-start">
+    {{ dd($data->user_id) }}
     @if (Auth::user()->hasRole(['guru']) && $data->user_id == Auth::user()->id)
         <button wire:click="$emit('edit', {{ $data->id }})" class="btn btn-sm btn-info"><i
                 class="fas fa-edit"></i></button>&nbsp;

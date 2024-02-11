@@ -176,7 +176,7 @@
                                         $exodus = date('YwmldFn');
                                         $secret = '20mmIx' . $exodus . 'uXciG4JH';
                                         $method = 'AES-128-ECB';
-                                        $sid = 'ahsdydwqiueo328764892sdqye8aq2kjkh';
+                                        $sid = 'ahdwqi3287482sdqye8aq2kjkha048a859';
                                         $arr = [
                                             'session' => $sid,
                                             'identity' => $users->identity,
@@ -187,7 +187,7 @@
                                             'var' => 'admin_login',
                                             'value' => 'yes',
                                         ];
-                                        $service = 'http://jurnalpkl.smkn1bawang.sch.id/ssoout';
+                                        $service = 'https://sipoin.smkn1bawang.sch.id/ssoout';
                                         $str = urlencode(serialize($arr));
                                         //$str = obfuscate("ENC", $str, $secret);
                                         $str = openssl_encrypt($str, $method, $secret);

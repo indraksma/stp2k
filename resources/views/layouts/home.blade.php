@@ -24,7 +24,14 @@
 </head>
 
 <body class="hold-transition login-page">
-    @yield('content')
+
+    <div class="login-box">
+        @yield('content')
+    </div>
+
+    <div class="text-center">
+        <small>&copy; 2024 Kesiswaan SMKN 1 Bawang</small>
+    </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.0.5/js/adminlte.min.js"></script>

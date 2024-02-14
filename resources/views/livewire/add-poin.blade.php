@@ -39,14 +39,14 @@
                         @endif
                         @if ($kelas_id)
                             <div class="form-group">
-                                <label for="siswa">NIS</label>
+                                <label for="siswa">Nama Siswa</label>
                                 <select wire:model="siswa_id"
                                     class="form-control @error('siswa_id') is-invalid @enderror" id="siswa"
                                     required>
                                     <option value="">-- Pilih --</option>
                                     @if ($siswa_list)
                                         @foreach ($siswa_list as $siswa)
-                                            <option value="{{ $siswa->id }}">{{ $siswa->nis }}</option>
+                                            <option value="{{ $siswa->id }}">{{ $siswa->nama }}</option>
                                         @endforeach
                                     @endif
                                 </select>
@@ -54,10 +54,9 @@
                         @endif
                         @if ($siswa_id)
                             <div class="form-group">
-                                <label for="nama_siswa">Nama Siswa</label>
-                                <input type="text" wire:model="nama_siswa"
-                                    class="form-control @error('nama_siswa') is-invalid @enderror" id="nama_siswa"
-                                    disabled />
+                                <label for="nis">NIS</label>
+                                <input type="text" wire:model="nis"
+                                    class="form-control @error('nis') is-invalid @enderror" id="nis" disabled />
                             </div>
                             <div class="form-group">
                                 <label for="jk">Jenis Kelamin</label>

@@ -1,9 +1,11 @@
 <div class="d-flex justify-content-start">
-    @if (Auth::user()->hasRole(['guru']) && $data->user_id == Auth::user()->id)
-        <button wire:click="$emit('edit', {{ $data->id }})" class="btn btn-sm btn-info"><i
-                class="fas fa-edit"></i></button>&nbsp;
-    @else
-        -
+    @if (Auth::user()->hasRole(['guru']))
+        @if ($data->user_id == Auth::user()->id)
+            <button wire:click="$emit('edit', {{ $data->id }})" class="btn btn-sm btn-info"><i
+                    class="fas fa-edit"></i></button>&nbsp;
+        @else
+            -
+        @endif
     @endif
     @if (Auth::user()->hasRole(['admin', 'waka', 'kesiswaan']))
         <button wire:click="$emit('edit', {{ $data->id }})" class="btn btn-sm btn-info"><i

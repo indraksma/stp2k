@@ -33,7 +33,38 @@
             </div>
         </div>
         <div class="card-body">
-            <livewire:siswa-table />
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Jurusan</label>
+                        <select class="form-control" wire:model="jurusan_id">
+                            <option value="">-- Pilih --</option>
+                            @foreach ($jurusan_list as $jrs)
+                                <option value="{{ $jrs->id }}">{{ $jrs->kode_jurusan }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Kelas</label>
+                        <select class="form-control" wire:model="kelas_id">
+                            <option value="">-- Pilih --</option>
+                            @if ($kelas_list)
+                                @foreach ($kelas_list as $kls)
+                                    <option value="{{ $kls->id }}">{{ $kls->nama_kelas }}</option>
+                                @endforeach
+                            @endif
+                        </select>
+                    </div>
+                </div>
+                <div class="col-12">
+                    @if ($showtable)
+                        <livewire:tabel-siswa :wire:key="$kelas_id" :id="$kelas_id" />
+                    @endif
+                    {{-- <livewire:siswa-table /> --}}
+                </div>
+            </div>
         </div>
     </div>
     {{-- Modal Siswa --}}

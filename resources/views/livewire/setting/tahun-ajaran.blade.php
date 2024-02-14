@@ -1,11 +1,11 @@
-@section('title', 'Tahun Ajaran')
+@section('title', 'Tahun Angkatan')
 <div class="row">
     <div class="col-md-6">
         <div class="card">
             <div class="card-header">
                 <div class="row">
                     <div class="col-6">
-                        <h3 class="card-title">Data Tahun Ajaran</h3>
+                        <h3 class="card-title">Data Tahun Angkatan</h3>
                     </div>
                 </div>
             </div>
@@ -14,8 +14,7 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th>Tahun Ajaran</th>
-                            <th>Kepala Sekolah</th>
+                            <th>Tahun Angkatan</th>
                             <th>Status</th>
                             <th style="width: 150px">Aksi</th>
                         </tr>
@@ -24,11 +23,6 @@
                         @foreach ($ta as $item)
                             <tr>
                                 <td>{{ $item->tahun_ajaran }}</td>
-                                @if ($item->kepsek_id != null)
-                                    <td>{{ $item->user->name }}</td>
-                                @else
-                                    <td>Belum disetting</td>
-                                @endif
                                 <td>
                                     @if ($item->aktif == 0)
                                         <span class="badge badge-secondary">Tidak Aktif</span>
@@ -74,8 +68,8 @@
                     <div class="input-group mb-3">
                         <input wire:model.lazy="tahun_ajaran" id="tahun_ajaran" type="text" name="tahun_ajaran"
                             value="{{ old('tahun_ajaran') }}"
-                            class="form-control @error('tahun_ajaran') is-invalid @enderror" placeholder="Tahun Ajaran"
-                            required="required">
+                            class="form-control @error('tahun_ajaran') is-invalid @enderror"
+                            placeholder="Tahun Angkatan" required="required">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-calendar"></span>
@@ -83,26 +77,6 @@
                         </div>
                     </div>
                     @error('tahun_ajaran')
-                        <div class="alert alert-danger">
-                            <span>{{ $message }}</span>
-                        </div>
-                    @enderror
-                    <div class="input-group mb-3">
-                        <select wire:model="user_id" value="{{ old('user_id') }}"
-                            class="form-control @error('user_id') is-invalid @enderror" placeholder="Tahun Ajaran"
-                            required="required">
-                            <option value="">-- Pilih Kepala Sekolah --</option>
-                            @foreach ($user as $item)
-                                <option value="{{ $item->id }}">{{ $item->name }}</option>
-                            @endforeach
-                        </select>
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-user"></span>
-                            </div>
-                        </div>
-                    </div>
-                    @error('user_id')
                         <div class="alert alert-danger">
                             <span>{{ $message }}</span>
                         </div>

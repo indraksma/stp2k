@@ -9,13 +9,17 @@
         <div class="col-12">
             <div class="card card-primary card-outline">
                 <div class="card-body">
+                    <div class="form-group">
+                        <input type="text" class="form-control mb-2" placeholder="Search" wire:model="searchTerm" />
+                    </div>
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered">
                             <thead>
                                 <tr>
-                                    <th>No</th>
                                     <th>Tanggal</th>
                                     <th>Nama Siswa</th>
+                                    <th>NIS</th>
+                                    <th>Kelas</th>
                                     <th>Keterangan</th>
                                     <th>Poin Pengurang</th>
                                     <th>Aksi</th>
@@ -24,15 +28,15 @@
                             <tbody>
                                 @if ($data->isEmpty())
                                     <tr>
-                                        <td colspan="6" class="text-center">Belum ada data</td>
+                                        <td colspan="7" class="text-center">Belum ada data</td>
                                     </tr>
                                 @else
-                                    @php $i = 1; @endphp
                                     @foreach ($data as $d)
                                         <tr>
-                                            <td>{{ $i }}</td>
                                             <td>{{ date('d-m-Y', strtotime($d->tanggal)) }}</td>
-                                            <td>{{ $d->siswa->nama }}</td>
+                                            <td>{{ $d->nama }}</td>
+                                            <td>{{ $d->nis }}</td>
+                                            <td>{{ $d->nama_kelas }}</td>
                                             <td>{{ $d->keterangan }}</td>
                                             <td>{{ $d->poin }}</td>
                                             <td>
@@ -42,7 +46,6 @@
                                                         class="fas fa-trash"></i></button>
                                             </td>
                                         </tr>
-                                        @php $i++; @endphp
                                     @endforeach
                                 @endif
                             </tbody>
@@ -103,14 +106,14 @@
                         @endif
                         @if ($kelas_id)
                             <div class="form-group">
-                                <label for="siswa">NIS</label>
+                                <label for="siswa">Nama Siswa</label>
                                 <select wire:model="siswa_id"
                                     class="form-control @error('siswa_id') is-invalid @enderror" id="siswa"
                                     required>
                                     <option value="">-- Pilih --</option>
                                     @if ($siswa_list)
                                         @foreach ($siswa_list as $siswa)
-                                            <option value="{{ $siswa->id }}">{{ $siswa->nis }}</option>
+                                            <option value="{{ $siswa->id }}">{{ $siswa->nama }}</option>
                                         @endforeach
                                     @endif
                                 </select>
@@ -118,10 +121,9 @@
                         @endif
                         @if ($siswa_id)
                             <div class="form-group">
-                                <label for="nama_siswa">Nama Siswa</label>
-                                <input type="text" wire:model="nama_siswa"
-                                    class="form-control @error('nama_siswa') is-invalid @enderror" id="nama_siswa"
-                                    disabled />
+                                <label for="nis">NIS</label>
+                                <input type="text" wire:model="nis"
+                                    class="form-control @error('nis') is-invalid @enderror" id="nis" disabled />
                             </div>
                             <div class="form-group">
                                 <label for="jk">Jenis Kelamin</label>
@@ -139,14 +141,17 @@
                                 <textarea wire:model.lazy="keterangan" class="form-control @error('keterangan') is-invalid @enderror" id="keterangan"
                                     rows="3"></textarea>
                             </div>
+                            @if ($alertMinus)
+                                <div class="alert alert-warning">Poin akhir tidak boleh minus!</div>
+                            @endif
                             <div class="form-group">
                                 <label for="poin">Poin Pengurangan</label>
-                                <input type="number" wire:model="poin"
+                                <input type="number" wire:model.lazy="poin"
                                     class="form-control @error('poin') is-invalid @enderror" id="poin" />
                             </div>
                         @endif
                         @if ($showbtn)
-                            <button type="submit" class="btn btn-primary">Simpan</button>&emsp;
+                            <button type="submit" class="btn btn-primary mr-2">Simpan</button>
                         @endif
                         <button type="button" wire:click="closeModal" class="btn btn-default"
                             data-dismiss="modal">Batal</button>
@@ -155,4 +160,9 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript">
+        window.addEventListener('closeModalTambah', event => {
+            $("#modalTambah").modal('hide');
+        })
+    </script>
 </div>

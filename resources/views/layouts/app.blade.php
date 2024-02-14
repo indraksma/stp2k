@@ -126,7 +126,7 @@
                                         <a href="{{ route('ta') }}"
                                             class="{{ request()->routeIs('ta') ? 'nav-link active' : 'nav-link' }}">
                                             <i class="nav-icon fas fa-calendar-alt"></i>
-                                            <p>Tahun Ajaran</p>
+                                            <p>Tahun Angkatan</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">

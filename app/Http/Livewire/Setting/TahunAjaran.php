@@ -7,33 +7,30 @@ use Livewire\WithPagination;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 use App\Models\TahunAjaran as Tahun_ajaran;
-use App\Models\User;
 
 class TahunAjaran extends Component
 {
     use WithPagination, LivewireAlert;
 
-    public $tahun_ajaran, $ta_id, $user_id;
+    public $tahun_ajaran, $ta_id;
 
     public function render()
     {
         $ta = Tahun_ajaran::orderBy('tahun_ajaran', 'ASC')->paginate(10);
-        $users = User::all();
         return view('livewire.setting.tahun-ajaran', [
             'ta' => $ta,
-            'user' => $users,
         ])->extends('layouts.app');
     }
 
     private function resetInputFields()
     {
-        $this->reset(['ta_id', 'tahun_ajaran', 'user_id']);
+        $this->reset(['ta_id', 'tahun_ajaran']);
         $this->resetErrorBag();
     }
 
     public function resetForm()
     {
-        $this->reset(['ta_id', 'tahun_ajaran', 'user_id']);
+        $this->reset(['ta_id', 'tahun_ajaran']);
         $this->resetErrorBag();
     }
 
@@ -47,18 +44,17 @@ class TahunAjaran extends Component
 
         $this->validate([
             'tahun_ajaran'      => ['required'],
-            'user_id'      => ['required'],
         ], $messages);
 
         if ($this->ta_id) {
             Tahun_ajaran::updateOrCreate(['id' => $this->ta_id], [
                 'tahun_ajaran'      => $this->tahun_ajaran,
-                'kepsek_id'      => $this->user_id
+                'kepsek_id'      => NULL,
             ]);
         } else {
             Tahun_ajaran::updateOrCreate(['id' => $this->ta_id], [
                 'tahun_ajaran'      => $this->tahun_ajaran,
-                'kepsek_id'      => $this->user_id,
+                'kepsek_id'      => NULL,
                 'aktif'      => 0,
             ]);
         }
@@ -72,7 +68,6 @@ class TahunAjaran extends Component
         $ta = Tahun_ajaran::findOrFail($id);
 
         $this->ta_id = $id;
-        $this->user_id = $ta->kepsek_id;
         $this->tahun_ajaran = $ta->tahun_ajaran;
     }
 
@@ -84,8 +79,8 @@ class TahunAjaran extends Component
 
     public function deactivate($id)
     {
-        Tahun_ajaran::where('id', $id)->update(['aktif' => 1]);
-        $this->alert('success', 'Aktivasi berhasil!');
+        Tahun_ajaran::where('id', $id)->update(['aktif' => 0]);
+        $this->alert('success', 'Deaktivasi berhasil!');
     }
 
     public function delete($id)

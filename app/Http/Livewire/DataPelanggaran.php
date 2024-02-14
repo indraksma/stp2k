@@ -2,9 +2,12 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Jurusan;
 use App\Models\Pelanggaran;
 use App\Models\Siswa;
+use App\Models\Kelas;
 use Livewire\Component;
+use Livewire\WithPagination;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class DataPelanggaran extends Component

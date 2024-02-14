@@ -15,8 +15,9 @@ class PenguranganPoin extends Component
 {
     use WithPagination, LivewireAlert;
 
-    public $pengurangan_id, $jurusan_id, $kelas_id, $siswa_id, $tanggal, $kelas_list, $jurusan_list, $siswa_list, $poin, $nama_siswa, $poin_siswa, $jk, $keterangan;
+    public $pengurangan_id, $jurusan_id, $kelas_id, $siswa_id, $tanggal, $kelas_list, $jurusan_list, $siswa_list, $poin, $nis, $poin_siswa, $jk, $keterangan, $searchTerm;
     public $showbtn = false;
+    public $alertMinus = false;
 
     private $cekform = true;
 
@@ -30,7 +31,17 @@ class PenguranganPoin extends Component
 
     public function render()
     {
-        $data = ModelsPenguranganPoin::latest()->paginate(10);
+        $data = ModelsPenguranganPoin::select('pengurangan_poins.id', 'pengurangan_poins.tanggal', 'pengurangan_poins.poin', 'pengurangan_poins.keterangan', 'siswas.nama', 'siswas.nis', 'kelass.nama_kelas')->join('siswas', 'pengurangan_poins.siswa_id', '=', 'siswas.id')->join('kelass', 'siswas.kelas_id', '=', 'kelass.id')->where(function ($sub_query) {
+            if (date_parse($this->searchTerm)) {
+                $tanggal = date('Y-m-d', strtotime($this->searchTerm));
+            } else {
+                $tanggal = $this->searchTerm;
+            }
+            $sub_query->where('pengurangan_poins.tanggal', 'like', '%' . $tanggal . '%')
+                ->orWhere('siswas.nama', 'like', '%' . $this->searchTerm . '%')
+                ->orWhere('siswas.nis', 'like', '%' . $this->searchTerm . '%')
+                ->orWhere('kelass.nama_kelas', 'like', '%' . $this->searchTerm . '%');
+        })->orderBy('tanggal', 'DESC')->paginate(10);
         return view('livewire.pengurangan-poin', [
             'data' => $data,
         ])->extends('layouts.app');
@@ -57,12 +68,18 @@ class PenguranganPoin extends Component
             $this->cekform = false;
         }
         if ($this->cekform) {
+            $poinakhir = $this->poin_siswa - $this->poin;
             if ($this->poin_siswa == 0) {
                 $this->showbtn = false;
+            } elseif ($poinakhir < 0) {
+                $this->alertMinus = true;
+                $this->showbtn = false;
             } else {
+                $this->alertMinus = false;
                 $this->showbtn = true;
             }
         } else {
+            $this->alertMinus = false;
             $this->showbtn = false;
         }
     }
@@ -86,7 +103,7 @@ class PenguranganPoin extends Component
     public function updatedSiswaId()
     {
         $siswa = Siswa::find($this->siswa_id);
-        $this->nama_siswa = $siswa->nama;
+        $this->nis = $siswa->nis;
         if ($siswa->poin_siswa == NULL || $siswa->poin_siswa == "") {
             $this->poin_siswa = 0;
         } else {
@@ -108,12 +125,13 @@ class PenguranganPoin extends Component
 
     private function resetForm()
     {
-        $this->reset(['pengurangan_id', 'jurusan_id', 'siswa_id', 'kelas_id', 'poin', 'poin_siswa', 'keterangan', 'jk', 'nama_siswa', 'kelas_list', 'siswa_list']);
+        $this->reset(['pengurangan_id', 'jurusan_id', 'siswa_id', 'kelas_id', 'poin', 'poin_siswa', 'keterangan', 'jk', 'nis', 'kelas_list', 'siswa_list']);
     }
 
     public function closeModal()
     {
         $this->resetForm();
+        $this->dispatchBrowserEvent('closeModalTambah');
     }
 
     public function store()
@@ -135,7 +153,7 @@ class PenguranganPoin extends Component
         $siswa->poin_siswa = $siswa->poin_siswa - $this->poin;
         $siswa->update();
 
-        ModelsPenguranganPoin::updateOrCreate(['id' => $this->pengurangan_id], [
+        ModelsPenguranganPoin::create([
             'tanggal'      => $this->tanggal,
             'siswa_id'      => $this->siswa_id,
             'user_id'      => Auth::user()->id,
@@ -143,7 +161,7 @@ class PenguranganPoin extends Component
             'poin'      => $this->poin,
         ]);
 
-        $this->alert('success', $this->siswa_id ? 'Data berhasil diubah!' : 'Data berhasil ditambahkan!');
+        $this->alert('success', 'Data berhasil ditambahkan!');
         $this->showbtn = false;
         $this->closeModal();
     }

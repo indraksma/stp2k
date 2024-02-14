@@ -128,7 +128,8 @@
             @endif
 
             @if ($component->showBulkActionsDropdownAlpine())
-                <div x-cloak x-show="(selectedItems.length > 0 || alwaysShowBulkActions)" class="w-full md:w-auto mb-4 md:mb-0">
+                <div x-cloak x-show="(selectedItems.length > 0 || alwaysShowBulkActions)"
+                    class="w-full md:w-auto mb-4 md:mb-0">
                     <div x-data="{ open: false, childElementOpen: false }" @keydown.window.escape="if (!childElementOpen) { open = false }"
                         x-on:click.away="if (!childElementOpen) { open = false }"
                         class="relative inline-block text-left z-10 w-full md:w-auto">
@@ -370,8 +371,7 @@
                         </div>
 
                         @if ($component->isFilterLayoutPopover())
-                            <ul x-cloak class="dropdown-menu w-100 mt-md-5" x-bind:class="{ 'show': open }"
-                                role="menu">
+                            <ul x-cloak class="dropdown-menu w-100" x-bind:class="{ 'show': open }" role="menu">
                                 @foreach ($component->getVisibleFilters() as $filter)
                                     <div wire:key="{{ $component->getTableName() }}-filter-{{ $filter->getKey() }}"
                                         class="p-2"

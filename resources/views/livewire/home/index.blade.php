@@ -8,7 +8,7 @@
         <div class="col-md-6">
             <div class="card card-primary card-outline">
                 <div class="card-body">
-                    <h5>10 Pelanggaran Terakhir</h5>
+                    <h5>Pelanggaran Hari ini</h5>
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered mb-2">
                             <thead>
@@ -17,8 +17,7 @@
                                     <th>Tanggal</th>
                                     <th>Nama</th>
                                     <th>Kelas</th>
-                                    <th>Jenis Pelanggaran</th>
-                                    <th>Kode Pelanggaran</th>
+                                    <th>Nama Pelanggaran</th>
                                     <th>Poin</th>
                                 </tr>
                             </thead>
@@ -31,9 +30,7 @@
                                             <td>{{ date('d-m-Y', strtotime($datar->tanggal)) }}</td>
                                             <td>{{ $datar->siswa->nama }}</td>
                                             <td>{{ $datar->siswa->kelas->nama_kelas }}</td>
-                                            <td>{{ $datar->kode_pelanggaran->jenis_pelanggaran->jenis_pelanggaran }}
-                                            </td>
-                                            <td>{{ $datar->kode_pelanggaran->kode_pelanggaran }}</td>
+                                            <td>{{ $datar->kode_pelanggaran->nama_pelanggaran }}</td>
                                             <td><span class="badge bg-secondary">{{ $datar->poin }}</span></td>
                                         </tr>
                                         @php $no++; @endphp

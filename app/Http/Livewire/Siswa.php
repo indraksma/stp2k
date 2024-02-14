@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Siswa as ModelsSiswa;
 use App\Models\Kelas as ModelsKelas;
+use App\Models\Jurusan;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
@@ -11,7 +12,6 @@ use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Illuminate\Support\Facades\Storage;
 
 use App\Imports\SiswaImport;
-use App\Models\Pelanggaran;
 use Livewire\WithPagination;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -19,11 +19,20 @@ class Siswa extends Component
 {
     use LivewireAlert, WithFileUploads, WithPagination;
 
-    public $nama, $nis, $jk, $kelas_id, $siswa_id, $tempat_lahir, $tanggal_lahir, $riwayatsiswa, $riwayatpoin;
+    public $nama, $nis, $jk, $kelas_id, $siswa_id, $tempat_lahir, $tanggal_lahir, $riwayatsiswa, $riwayatpoin, $jurusan_list, $jurusan_id, $kelas_list, $pelanggaran;
     public $template_excel;
     public $openModal = false;
     public $iteration = 0;
     protected $listeners = ['edit', 'delete', 'detail'];
+
+    public $showtable = false;
+
+    private $cekform = true;
+
+    public function mount()
+    {
+        $this->jurusan_list = Jurusan::all();
+    }
 
     public function render()
     {
@@ -36,7 +45,7 @@ class Siswa extends Component
 
     public function resetInputFields()
     {
-        $this->reset(['nama', 'kelas_id', 'nis', 'jk', 'siswa_id']);
+        $this->reset(['nama', 'nis', 'jk', 'siswa_id']);
         $this->iteration++;
         $this->resetErrorBag();
     }
@@ -125,5 +134,35 @@ class Siswa extends Component
     public function detail($id)
     {
         $this->siswa_id = $id;
+    }
+
+
+
+    private function checkForm()
+    {
+        if ($this->jurusan_id == "") {
+            $this->cekform = false;
+        }
+        if ($this->kelas_id == "") {
+            $this->cekform = false;
+        }
+        if ($this->cekform) {
+            $this->showtable = true;
+        } else {
+            $this->showtable = false;
+        }
+    }
+
+    public function updatedJurusanId()
+    {
+        $this->kelas_id = '';
+        $this->reset(['kelas_list', 'pelanggaran']);
+        $this->kelas_list = ModelsKelas::select('kelass.id', 'kelass.nama_kelas')->join('tahun_ajarans', 'kelass.tahun_ajaran_id', '=', 'tahun_ajarans.id')->where('tahun_ajarans.aktif', 1)->where('kelass.jurusan_id', $this->jurusan_id)->get();
+        $this->checkForm();
+    }
+
+    public function updatedKelasId()
+    {
+        $this->checkForm();
     }
 }

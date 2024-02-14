@@ -21,15 +21,15 @@
                                 class="form-control @error('kelas') is-invalid @enderror" id="kelas" disabled />
                         </div>
                         <div class="form-group">
-                            <label for="siswa">NIS</label>
-                            <input type="text" wire:model="nis"
-                                class="form-control @error('nis') is-invalid @enderror" id="siswa" disabled />
-                        </div>
-                        <div class="form-group">
                             <label for="nama_siswa">Nama Siswa</label>
                             <input type="text" wire:model="nama_siswa"
                                 class="form-control @error('nama_siswa') is-invalid @enderror" id="nama_siswa"
                                 disabled />
+                        </div>
+                        <div class="form-group">
+                            <label for="siswa">NIS</label>
+                            <input type="text" wire:model="nis"
+                                class="form-control @error('nis') is-invalid @enderror" id="siswa" disabled />
                         </div>
                         <div class="form-group">
                             <label for="jk">Jenis Kelamin</label>

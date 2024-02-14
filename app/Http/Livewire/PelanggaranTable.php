@@ -6,6 +6,8 @@ use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\Pelanggaran;
 use Illuminate\Support\Facades\Auth;
+use Rappasoft\LaravelLivewireTables\Views\Filters\DateFilter;
+use Illuminate\Database\Eloquent\Builder;
 
 class PelanggaranTable extends DataTableComponent
 {
@@ -19,6 +21,15 @@ class PelanggaranTable extends DataTableComponent
         $this->setDefaultSort('tanggal', 'desc');
     }
 
+    public function filters(): array
+    {
+        return [
+            DateFilter::make('Tanggal')->filter(function (Builder $builder, string $value) {
+                $builder->where('tanggal', $value);
+            }),
+        ];
+    }
+
     public function columns(): array
     {
         if (Auth::user()->hasRole(['admin', 'kesiswaan'])) {
@@ -27,18 +38,25 @@ class PelanggaranTable extends DataTableComponent
                     ->format(
                         fn ($value, $row, Column $column) => date('d-m-Y', strtotime($row->tanggal))
                     )
-                    ->searchable()
+                    ->searchable(function (Builder $query, $searchTerm) {
+                        if (date_parse($searchTerm)) {
+                            $tanggal = date('Y-m-d', strtotime($searchTerm));
+                        } else {
+                            $tanggal = $searchTerm;
+                        }
+                        $query->orWhere('tanggal', 'like', $tanggal);
+                    })
                     ->sortable(),
                 Column::make("Nama Siswa", "siswa.nama")
+                    ->searchable()
+                    ->sortable(),
+                Column::make("NIS", "siswa.nis")
                     ->searchable()
                     ->sortable(),
                 Column::make("Kelas", "siswa.kelas.nama_kelas")
                     ->searchable()
                     ->sortable(),
-                Column::make("Jenis Pelanggaran", "kode_pelanggaran.jenis_pelanggaran.jenis_pelanggaran")
-                    ->searchable()
-                    ->sortable(),
-                Column::make("Kode Pelanggaran", "kode_pelanggaran.kode_pelanggaran")
+                Column::make("Nama Pelanggaran", "kode_pelanggaran.nama_pelanggaran")
                     ->searchable()
                     ->sortable(),
                 Column::make("Poin", "poin")
@@ -58,9 +76,19 @@ class PelanggaranTable extends DataTableComponent
                     ->format(
                         fn ($value, $row, Column $column) => date('d-m-Y', strtotime($row->tanggal))
                     )
-                    ->searchable()
+                    ->searchable(function (Builder $query, $searchTerm) {
+                        if (date_parse($searchTerm)) {
+                            $tanggal = date('Y-m-d', strtotime($searchTerm));
+                        } else {
+                            $tanggal = $searchTerm;
+                        }
+                        $query->orWhere('tanggal', 'like', $tanggal);
+                    })
                     ->sortable(),
                 Column::make("Nama Siswa", "siswa.nama")
+                    ->searchable()
+                    ->sortable(),
+                Column::make("NIS", "siswa.nis")
                     ->searchable()
                     ->sortable(),
                 Column::make("Kelas", "siswa.kelas.nama_kelas")

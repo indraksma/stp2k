@@ -14,15 +14,9 @@
                 <b>NIS</b> <a class="float-right">{{ $riwayatsiswa->nis }}</a>
             </li>
             <li class="list-group-item">
-                <b>Jenis Kelamin</b> <a class="float-right">{{ $riwayatsiswa->jk }}</a>
-            </li>
-            <li class="list-group-item">
-                <b>Tempat Lahir</b> <a
-                    class="float-right">{{ $riwayatsiswa->tempat_lahir ? $riwayatsiswa->tempat_lahir : '-' }}</a>
-            </li>
-            <li class="list-group-item">
-                <b>Tanggal Lahir</b> <a
-                    class="float-right">{{ $riwayatsiswa->tanggal_lahir ? $riwayatsiswa->tanggal_lahir : '-' }}</a>
+                <b>Total Poin Siswa</b> <a class="float-right">
+                    <h4 class="p-0 m-0"><span class="badge badge-warning">{{ $riwayatsiswa->poin_siswa }}</span></h4>
+                </a>
             </li>
         </ul>
     @endif
@@ -33,8 +27,6 @@
                 <tr>
                     <th>No</th>
                     <th>Tanggal</th>
-                    <th>Jenis Pelanggaran</th>
-                    <th>Kode Pelanggaran</th>
                     <th>Detail Pelanggaran</th>
                     <th>Poin</th>
                 </tr>
@@ -46,8 +38,6 @@
                         <tr>
                             <td>{{ $nor }}</td>
                             <td>{{ date('d-m-Y', strtotime($rp->tanggal)) }}</td>
-                            <td>{{ $rp->kode_pelanggaran->jenis_pelanggaran->jenis_pelanggaran }}</td>
-                            <td>{{ $rp->kode_pelanggaran->kode_pelanggaran }}</td>
                             <td>{{ $rp->kode_pelanggaran->nama_pelanggaran }}</td>
                             <td><span class="badge badge-warning">{{ $rp->poin }}</span></td>
                         </tr>
@@ -55,7 +45,7 @@
                     @endforeach
                 @else
                     <tr>
-                        <td colspan="6" class="bg-secondary">Belum Ada Riwayat Poin</td>
+                        <td colspan="4" class="bg-secondary">Belum Ada Riwayat Poin</td>
                     </tr>
                 @endif
             </tbody>

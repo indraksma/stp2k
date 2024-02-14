@@ -16,7 +16,7 @@ class AddPoin extends Component
 {
     use LivewireAlert;
 
-    public $jp_id, $jurusan_id, $kelas_id, $siswa_id, $kp_id, $tanggal, $kelas_list, $jurusan_list, $jp_list, $kp_list, $siswa_list, $poin, $nama_siswa, $poin_siswa, $jk;
+    public $jp_id, $jurusan_id, $kelas_id, $siswa_id, $kp_id, $tanggal, $kelas_list, $jurusan_list, $jp_list, $kp_list, $siswa_list, $poin, $nis, $poin_siswa, $jk;
     public $showbtn = false;
 
     private $cekform = true;
@@ -79,7 +79,7 @@ class AddPoin extends Component
     public function updatedSiswaId()
     {
         $siswa = Siswa::find($this->siswa_id);
-        $this->nama_siswa = $siswa->nama;
+        $this->nis = $siswa->nis;
         if ($siswa->poin_siswa == NULL || $siswa->poin_siswa == "") {
             $this->poin_siswa = 0;
         } else {

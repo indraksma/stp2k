@@ -16,7 +16,7 @@
                         <tr>
                             <th>Nama Kelas</th>
                             <th>Jurusan</th>
-                            <th>Tahun Ajaran</th>
+                            <th>Tahun Angkatan</th>
                             <th style="width: 150px">Aksi</th>
                         </tr>
                     </thead>
@@ -28,7 +28,7 @@
                                 <td>{{ $item->tahun_ajaran->tahun_ajaran }}</td>
                                 <td>
                                     <button wire:click="edit({{ $item->id }})" class="btn btn-sm btn-info"><i
-                                            class="fas fa-edit"></i></button> 
+                                            class="fas fa-edit"></i></button>
                                     <button wire:click="delete({{ $item->id }})" class="btn btn-sm btn-danger"
                                         onclick="confirm('Are you sure to delete?') || event.stopImmediatePropagation()"><i
                                             class="fas fa-trash"></i></button>
@@ -95,10 +95,22 @@
                             <span>{{ $message }}</span>
                         </div>
                     @enderror
-                </div>
-                <div class="modal-footer justify-content-between">
                     <button type="button" wire:click="resetForm()" class="btn btn-warning">Reset</button>
                     <button type="button" wire:click.prevent="store()" class="btn btn-primary">Save</button>
+                    <hr />
+                    <h5>Import Data</h5>
+                    <div class="form-group mb-0">
+                        <div class="input-group">
+                            <div class="custom-file">
+                                <input class="form-control" type="file" wire:model="template_excel"
+                                    id="upload{{ $iteration }}">
+                            </div>
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-info" wire:click="import">Import</button>
+                            </div>
+                        </div>
+                        <a href="{{ asset('format_import_kelas.xlsx') }}">Download format import</a>
+                    </div>
                 </div>
             </form>
         </div>

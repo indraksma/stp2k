@@ -10,6 +10,8 @@
                                 <tr>
                                     <th>Tanggal</th>
                                     <th>Nama</th>
+                                    <th>Kelas</th>
+                                    <th>NIS</th>
                                     <th>Topik</th>
                                     <th>Aduan</th>
                                     <th>Aksi</th>
@@ -21,6 +23,8 @@
                                         <tr>
                                             <td>{{ date('d-m-Y', strtotime($data->created_at)) }}</td>
                                             <td>{{ $data->nama }}</td>
+                                            <td>{{ $data->kelas }}</td>
+                                            <td>{{ $data->nis }}</td>
                                             <td>{{ $data->topik }}</td>
                                             <td>{{ $data->aduan }}</td>
                                             <td>
@@ -39,7 +43,7 @@
                                     @endforeach
                                 @else
                                     <tr>
-                                        <td colspan="5" class="text-center">Belum Ada Aduan</td>
+                                        <td colspan="7" class="text-center">Belum Ada Aduan</td>
                                     </tr>
                                 @endif
                             </tbody>

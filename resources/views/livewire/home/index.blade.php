@@ -22,7 +22,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @if ($riwayat)
+                                @if ($riwayat->isNotEmpty())
                                     @php $no = 1; @endphp
                                     @foreach ($riwayat as $datar)
                                         <tr>
@@ -35,6 +35,10 @@
                                         </tr>
                                         @php $no++; @endphp
                                     @endforeach
+                                @else
+                                    <tr>
+                                        <td colspan="6" class="text-center">Belum Ada Data</td>
+                                    </tr>
                                 @endif
                             </tbody>
                         </table>

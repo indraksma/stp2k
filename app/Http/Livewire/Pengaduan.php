@@ -28,7 +28,7 @@ class Pengaduan extends Component
             Storage::disk('public')->delete('img/aduan/' . $sql->dokumentasi);
         }
 
-        $sql->delete();
+        $sql->find($id)->delete();
 
         $this->alert('warning', 'Data berhasil dihapus!');
     }

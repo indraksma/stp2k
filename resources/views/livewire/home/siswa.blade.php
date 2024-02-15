@@ -82,6 +82,11 @@
                                 class="form-control @error('nama') is-invalid @enderror" id="nama" />
                         </div>
                         <div class="form-group">
+                            <label for="kelas">Kelas</label>
+                            <input type="text" wire:model.lazy="kelas"
+                                class="form-control @error('kelas') is-invalid @enderror" id="kelas" />
+                        </div>
+                        <div class="form-group">
                             <label for="topik">Topik</label>
                             <input type="text" wire:model.lazy="topik"
                                 class="form-control @error('topik') is-invalid @enderror" id="topik" />

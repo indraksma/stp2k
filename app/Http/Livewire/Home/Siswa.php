@@ -12,7 +12,7 @@ class Siswa extends Component
 {
     use LivewireAlert, WithFileUploads;
 
-    public $nis, $siswa_id, $nama, $topik, $aduan, $dokumentasi;
+    public $nis, $siswa_id, $nama, $topik, $aduan, $dokumentasi, $kelas, $nis_aduan;
     public $showcek = false;
 
     protected $rules = [
@@ -60,12 +60,14 @@ class Siswa extends Component
 
         Pengaduan::create([
             'nama' => $this->nama,
+            'nis' => $this->nis_aduan,
+            'kelas' => $this->kelas,
             'topik' => $this->topik,
             'aduan' => $this->aduan,
             'dokumentasi' => $name,
         ]);
 
-        $this->reset(['nama', 'topik', 'aduan', 'dokumentasi']);
+        $this->reset(['nama', 'topik', 'aduan', 'dokumentasi', 'kelas', 'nis_aduan']);
         $this->alert('success', 'Pengaduan berhasil dikirimkan');
         $this->dispatchBrowserEvent('closeModal');
     }

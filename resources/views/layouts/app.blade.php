@@ -105,6 +105,13 @@
                                     <p>Pengurangan Poin</p>
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a href="{{ route('pengaduan') }}"
+                                    class="{{ request()->routeIs('pengaduan') ? 'nav-link active' : 'nav-link' }}">
+                                    <i class="nav-icon fas fa-portrait"></i>
+                                    <p>Pengaduan</p>
+                                </a>
+                            </li>
                         @endif
                         @if (Auth::user()->hasRole('admin'))
                             <li

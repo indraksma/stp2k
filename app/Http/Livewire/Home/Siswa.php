@@ -2,13 +2,24 @@
 
 namespace App\Http\Livewire\Home;
 
+use App\Models\Pengaduan;
 use App\Models\Siswa as ModelsSiswa;
 use Livewire\Component;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Livewire\WithFileUploads;
 
 class Siswa extends Component
 {
-    public $nis, $siswa_id;
+    use LivewireAlert, WithFileUploads;
+
+    public $nis, $siswa_id, $nama, $topik, $aduan, $dokumentasi;
     public $showcek = false;
+
+    protected $rules = [
+        'topik' => 'required',
+        'aduan' => 'required',
+        'dokumentasi' => 'nullable|image|max:2048',
+    ];
 
     public function render()
     {
@@ -35,5 +46,27 @@ class Siswa extends Component
     {
         $this->showcek = false;
         $this->reset(['nis', 'siswa_id']);
+    }
+
+    public function store()
+    {
+        $this->validate();
+
+        $name = NULL;
+        if ($this->dokumentasi) {
+            $name = md5($this->dokumentasi . microtime()) . '.' . $this->dokumentasi->extension();
+            $this->dokumentasi->storeAs('img/aduan/', $name, 'public');
+        }
+
+        Pengaduan::create([
+            'nama' => $this->nama,
+            'topik' => $this->topik,
+            'aduan' => $this->aduan,
+            'dokumentasi' => $name,
+        ]);
+
+        $this->reset(['nama', 'topik', 'aduan', 'dokumentasi']);
+        $this->alert('success', 'Pengaduan berhasil dikirimkan');
+        $this->dispatchBrowserEvent('closeModal');
     }
 }

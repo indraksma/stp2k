@@ -12,14 +12,17 @@
                         <button wire:click="ceksiswa" class="btn btn-primary btn-block"><i class="fas fa-user-check"></i>
                             Cek Poin
                             Siswa</button>
-                        <button class="btn btn-warning btn-block"><i class="fas fa-flag"></i>
+                        <button class="btn btn-warning btn-block" data-toggle="modal" data-target="#modalPengaduan"><i
+                                class="fas fa-flag"></i>
                             Pengaduan</button>
-                        <button class="btn btn-success btn-block"><i class="fas fa-file-download"></i>
+                        <a href="{{ asset('/tatib.pdf') }}" class="btn btn-success btn-block"><i
+                                class="fas fa-file-download"></i>
                             Tata
-                            Tertib</button>
-                        <button class="btn btn-info btn-block"><i class="fas fa-file-download"></i>
+                            Tertib</a>
+                        <a href="{{ asset('/point.pdf') }}" class="btn btn-info btn-block"><i
+                                class="fas fa-file-download"></i>
                             Ketentuan
-                            Poin</button>
+                            Poin</a>
                     @endif
                     @if ($showcek)
                         <div class="form-group mt-2">
@@ -64,18 +67,49 @@
     <div wire:ignore.self class="modal fade" id="modalPengaduan" aria-modal="true" role="dialog">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <div class="modal-header bg-primary">
-                    <h4 class="modal-title">Pengaduan Siswa</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                </div>
-                <div class="modal-footer justify-content-between">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
+                <form wire:submit.prevent="store" enctype="multipart/form-data">
+                    @csrf
+                    <div class="modal-header bg-primary">
+                        <h4 class="modal-title">Pengaduan Siswa</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="nama">Nama</label>
+                            <input type="text" wire:model.lazy="nama"
+                                class="form-control @error('nama') is-invalid @enderror" id="nama" />
+                        </div>
+                        <div class="form-group">
+                            <label for="topik">Topik</label>
+                            <input type="text" wire:model.lazy="topik"
+                                class="form-control @error('topik') is-invalid @enderror" id="topik" />
+                        </div>
+                        <div class="form-group">
+                            <label for="aduan">Aduan</label>
+                            <textarea wire:model.lazy="aduan" class="form-control @error('aduan') is-invalid @enderror" id="aduan"
+                                rows="5"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="dokumentasi">Dokumentasi (Opsional)</label>
+                            <input type="file" wire:model="dokumentasi"
+                                class="form-control  @error('dokumentasi') is-invalid @enderror" id="dokumentasi">
+                            <small>Maksimal 2MB</small>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="submit" class="btn btn-primary">Kirim</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
+
+    <script type="text/javascript">
+        window.addEventListener('closeModal', event => {
+            $("#modalPengaduan").modal('hide');
+        })
+    </script>
 </div>

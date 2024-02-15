@@ -19,17 +19,17 @@ Route::get('/', function () {
     if (Auth::check()) {
         return redirect()->route('home');
     } else {
-        return view('auth.login');
+        return view('auth.loginsso');
     }
 });
 
 Route::get('homesiswa', App\Http\Livewire\Home\Siswa::class)->name('homesiswa');
 
-// Route::get('login', [SsoController::class, 'showForm'])->name('login');
+Route::get('login', [SsoController::class, 'showForm'])->name('login');
 Route::get('sso', [SsoController::class, 'sso']);
 Route::get('ssocek', [SsoController::class, 'ssocek'])->name('ssocek');
 Route::get('ssoout', [SsoController::class, 'logout'])->name('ssoout');
-// Route::get('logout', [SsoController::class, 'logout'])->name('logout');
+Route::get('logout', [SsoController::class, 'logout'])->name('logout');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('siswa', App\Http\Livewire\Siswa::class)->name('siswa');
@@ -42,6 +42,7 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth', 'role:admin|kesiswaan'])->group(function () {
     Route::get('penguranganpoin', App\Http\Livewire\PenguranganPoin::class)->name('penguranganpoin');
     Route::get('kenaikankelas', App\Http\Livewire\KenaikanKelas::class)->name('kenaikankelas');
+    Route::get('pengaduan', App\Http\Livewire\Pengaduan::class)->name('pengaduan');
 });
 
 Route::middleware(['auth', 'role:admin'])->group(function () {

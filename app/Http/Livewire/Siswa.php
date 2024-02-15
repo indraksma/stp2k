@@ -45,7 +45,7 @@ class Siswa extends Component
 
     public function resetInputFields()
     {
-        $this->reset(['nama', 'nis', 'jk', 'siswa_id']);
+        $this->reset(['nama', 'nis', 'jk', 'siswa_id', 'tempat_lahir', 'tanggal_lahir']);
         $this->iteration++;
         $this->resetErrorBag();
     }
@@ -67,8 +67,6 @@ class Siswa extends Component
             'nama'      => ['required'],
             'nis'      => ['required'],
             'jk'      => ['required'],
-            'tempat_lahir'      => ['required'],
-            'tanggal_lahir'      => ['required'],
             'kelas_id'      => ['required']
         ], $messages);
 

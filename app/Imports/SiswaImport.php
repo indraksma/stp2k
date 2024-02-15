@@ -30,6 +30,7 @@ class SiswaImport implements ToModel, WithStartRow
             'tempat_lahir' => $row[4],
             'tanggal_lahir' => $row[5],
             'kelas_id' => $kelas_id->id,
+            'poin_siswa' => 0,
         ]);
     }
 }

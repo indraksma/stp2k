@@ -38,6 +38,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('editpoin/{id}', App\Http\Livewire\EditPoin::class)->name('editpoin');
     Route::get('datapelanggaran', App\Http\Livewire\DataPelanggaran::class)->name('datapelanggaran');
     Route::get('kodepelanggaran', App\Http\Livewire\KodePelanggaran::class)->name('kodepelanggaran');
+    Route::get('print/kelas/{id}', [App\Http\Controllers\CetakController::class, 'kelas'])->name('print.kelas');
+    Route::get('print/siswa/{id}', [App\Http\Controllers\CetakController::class, 'siswa'])->name('print.siswa');
 });
 Route::middleware(['auth', 'role:admin|kesiswaan'])->group(function () {
     Route::get('penguranganpoin', App\Http\Livewire\PenguranganPoin::class)->name('penguranganpoin');

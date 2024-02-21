@@ -60,6 +60,8 @@
                 </div>
                 <div class="col-12">
                     @if ($showtable)
+                        <a target="_blank" class="btn btn-secondary" href="{{ route('print.kelas', $kelas_id) }}"><i
+                                class="fas fa-print"></i> Cetak Daftar Poin Kelas</a>
                         <livewire:tabel-siswa :wire:key="$kelas_id" :id="$kelas_id" />
                     @endif
                     {{-- <livewire:siswa-table /> --}}

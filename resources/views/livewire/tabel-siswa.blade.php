@@ -32,6 +32,8 @@
                                     </td>
                                     <td>
                                         <div class="d-flex justify-content-start">
+                                            <a target="_blank" href="{{ route('print.siswa', $data->id) }}"
+                                                class="btn btn-sm btn-secondary"><i class="fas fa-print"></i></a>&nbsp;
                                             <button wire:click="$emit('detail', {{ $data->id }})"
                                                 data-toggle="modal" data-target="#modalRiwayat"
                                                 class="btn btn-sm btn-primary"><i class="fas fa-eye"></i></button>&nbsp;

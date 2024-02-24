@@ -16,8 +16,9 @@ class AddPoin extends Component
 {
     use LivewireAlert;
 
-    public $jp_id, $jurusan_id, $kelas_id, $siswa_id, $kp_id, $tanggal, $kelas_list, $jurusan_list, $jp_list, $kp_list, $siswa_list, $poin, $nis, $poin_siswa, $jk;
+    public $jp_id, $jurusan_id, $kelas_id, $siswa_id, $kp_id, $tanggal, $kelas_list, $jurusan_list, $jp_list, $kp_list, $siswa_list, $poin, $nis, $poin_siswa, $jk, $check;
     public $showbtn = false;
+    public $alert_pernah = false;
 
     private $cekform = true;
 
@@ -51,6 +52,9 @@ class AddPoin extends Component
             $this->cekform = false;
         }
         if ($this->tanggal == "") {
+            $this->cekform = false;
+        }
+        if ($this->check == false) {
             $this->cekform = false;
         }
         if ($this->cekform) {
@@ -101,9 +105,20 @@ class AddPoin extends Component
     {
         $this->reset('poin');
         if ($this->kp_id != "") {
-            $kp = KodePelanggaran::where('id', $this->kp_id)->first();
-            $this->poin = $kp->poin;
+            $cek_riwayat = Pelanggaran::where('siswa_id', $this->siswa_id)->where('kode_pelanggaran_id', $this->kp_id)->where('tanggal', $this->tanggal)->count();
+            if ($cek_riwayat == 0) {
+                $this->alert_pernah = false;
+                $kp = KodePelanggaran::where('id', $this->kp_id)->first();
+                $this->poin = $kp->poin;
+            } else {
+                $this->alert_pernah = true;
+            }
         }
+        $this->checkForm();
+    }
+
+    public function updatedCheck()
+    {
         $this->checkForm();
     }
 

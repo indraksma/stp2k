@@ -19,6 +19,7 @@
                                     <th>Kelas</th>
                                     <th>Nama Pelanggaran</th>
                                     <th>Poin</th>
+                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -32,12 +33,16 @@
                                             <td>{{ $datar->siswa->kelas->nama_kelas }}</td>
                                             <td>{{ $datar->kode_pelanggaran->nama_pelanggaran }}</td>
                                             <td><span class="badge bg-secondary">{{ $datar->poin }}</span></td>
+                                            <td><button wire:click="detail({{ $datar->siswa_id }})" data-toggle="modal"
+                                                    data-target="#modalRiwayat" class="btn btn-sm btn-primary"><i
+                                                        class="fas fa-eye"></i></button>
+                                            </td>
                                         </tr>
                                         @php $no++; @endphp
                                     @endforeach
                                 @else
                                     <tr>
-                                        <td colspan="6" class="text-center">Belum Ada Data</td>
+                                        <td colspan="7" class="text-center">Belum Ada Data</td>
                                     </tr>
                                 @endif
                             </tbody>
@@ -60,6 +65,8 @@
                                     <th>Nama</th>
                                     <th>Kelas</th>
                                     <th>Poin Pelanggaran</th>
+                                    {{-- <th>Penanganan Siswa</th> --}}
+                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -73,13 +80,57 @@
                                             <td>
                                                 <h4><span class="badge bg-warning">{{ $datas->poin_siswa }}</span></h4>
                                             </td>
+                                            {{-- <td>
+                                                <h5><span class="badge bg-secondary">-</span></h5>
+                                            </td> --}}
+                                            <td><button wire:click="detail({{ $datas->id }})" data-toggle="modal"
+                                                    data-target="#modalRiwayat" class="btn btn-sm btn-primary"><i
+                                                        class="fas fa-eye"></i></button>
+                                            </td>
                                         </tr>
                                         @php $i++; @endphp
                                     @endforeach
                                 @endif
                             </tbody>
                         </table>
+                        {{-- Keterangan Penanganan Siswa :
+                        <ul class="mb-0">
+                            <li>
+                                1 / 2 / 3 / 4 : Jumlah Poin Siswa Sudah Perlu dilakukan Penanganan ke-1 / 2 / 3 / 4 oleh
+                                BK
+                            </li>
+                            <li>
+                                <span class="badge bg-secondary">1</span> : Belum Ditangani BK
+                            </li>
+                            <li>
+                                <span class="badge bg-success">1</span> : Sudah Ditangani BK
+                            </li>
+                        </ul> --}}
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- Modal Riwayat --}}
+    <div wire:ignore.self class="modal fade" id="modalRiwayat" aria-modal="true" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary">
+                    <h4 class="modal-title">Detail Siswa</h4>
+                    <button type="button" class="close" wire:click="closeModal" data-dismiss="modal"
+                        aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    @if ($siswa_id)
+                        <livewire:detail-siswa :idsiswa="$siswa_id">
+                    @endif
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" wire:click="closeModal" class="btn btn-default"
+                        data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>

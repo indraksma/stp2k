@@ -96,15 +96,25 @@
                                 </select>
                             </div>
                         @endif
+                        @if ($alert_pernah)
+                            <div class="alert alert-danger">Siswa tersebut sudah tercatat melakukan pelanggaran
+                                tersebut hari ini!</div>
+                        @endif
                         @if ($poin)
                             <div class="form-group">
                                 <label for="poin">Poin Pelanggaran</label>
                                 <input type="text" wire:model="poin"
                                     class="form-control @error('poin') is-invalid @enderror" id="poin" disabled />
                             </div>
+                            <div class="alert alert-warning">
+                                <input type="checkbox" wire:model="check" id="checklist">
+                                <label for="checklist">Validasi</label>
+                                <p>Pastikan siswa sudah menyadari atas pelanggaran yg sudah dilakukan. Tunjukan poin ini
+                                    kepada siswa, jika perlu siswa yg mencentang Validasi.</p>
+                            </div>
                         @endif
                         @if ($showbtn)
-                            <button type="submit" class="btn btn-primary">Simpan</button>&emsp;
+                            <button type="submit" class="btn btn-primary mr-2">Simpan</button>
                         @endif
                         <a href="{{ route('datapelanggaran') }}"><button type="button"
                                 class="btn btn-success">Kembali</button></a>

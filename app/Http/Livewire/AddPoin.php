@@ -64,6 +64,21 @@ class AddPoin extends Component
         }
     }
 
+    public function cekRiwayat()
+    {
+        $this->reset('poin');
+        $cek_riwayat = Pelanggaran::where('siswa_id', $this->siswa_id)->where('kode_pelanggaran_id', $this->kp_id)->where('tanggal', $this->tanggal)->count();
+        if ($cek_riwayat == 0) {
+            if ($this->kp_id) {
+                $kp = KodePelanggaran::where('id', $this->kp_id)->first();
+                $this->poin = $kp->poin;
+            }
+            $this->alert_pernah = false;
+        } else {
+            $this->alert_pernah = true;
+        }
+    }
+
     public function updatedJurusanId()
     {
         $this->kelas_id = '';
@@ -76,7 +91,7 @@ class AddPoin extends Component
     {
         $this->reset(['siswa_list', 'siswa_id']);
         $this->siswa_id = '';
-        $this->siswa_list = Siswa::where('kelas_id', $this->kelas_id)->orderBy('nis', 'ASC')->get();
+        $this->siswa_list = Siswa::where('kelas_id', $this->kelas_id)->orderBy('nama', 'ASC')->get();
         $this->checkForm();
     }
 
@@ -90,6 +105,7 @@ class AddPoin extends Component
             $this->poin_siswa = $siswa->poin_siswa;
         }
         $this->jk = $siswa->jk;
+        $this->cekRiwayat();
         $this->checkForm();
     }
 

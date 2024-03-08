@@ -19,13 +19,15 @@ class Siswa extends Component
 {
     use LivewireAlert, WithFileUploads, WithPagination;
 
-    public $nama, $nis, $jk, $kelas_id, $siswa_id, $tempat_lahir, $tanggal_lahir, $riwayatsiswa, $riwayatpoin, $jurusan_list, $jurusan_id, $kelas_list, $pelanggaran;
+    public $nama, $nis, $jk, $kelas_id, $siswa_id, $tempat_lahir, $tanggal_lahir, $riwayatsiswa, $riwayatpoin, $jurusan_list, $jurusan_id, $kelas_list, $pelanggaran, $cari_nama, $carisiswa;
     public $template_excel;
     public $openModal = false;
     public $iteration = 0;
     protected $listeners = ['edit', 'delete', 'detail'];
+    protected $paginationTheme = 'bootstrap';
 
     public $showtable = false;
+    public $showsearch = false;
 
     private $cekform = true;
 
@@ -162,5 +164,24 @@ class Siswa extends Component
     public function updatedKelasId()
     {
         $this->checkForm();
+    }
+
+    public function updatedCariNama()
+    {
+        $this->reset('carisiswa');
+        $this->showsearch = false;
+    }
+
+    public function clearCariSiswa()
+    {
+        $this->reset(['carisiswa', 'cari_nama']);
+        $this->showsearch = false;
+    }
+
+    public function cariSiswa()
+    {
+        $siswa = ModelsSiswa::select('siswas.id', 'siswas.nama', 'siswas.nis', 'siswas.kelas_id', 'siswas.jk', 'siswas.poin_siswa')->join('kelass', 'siswas.kelas_id', '=', 'kelass.id')->join('tahun_ajarans', 'kelass.tahun_ajaran_id', '=', 'tahun_ajarans.id')->where('tahun_ajarans.aktif', 1)->where('siswas.nama', 'LIKE', '%' . $this->cari_nama . '%')->get();
+        $this->carisiswa = $siswa;
+        $this->showsearch = true;
     }
 }

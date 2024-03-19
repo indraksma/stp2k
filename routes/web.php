@@ -41,6 +41,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('print/kelas/{id}', [App\Http\Controllers\CetakController::class, 'kelas'])->name('print.kelas');
     Route::get('print/siswa/{id}', [App\Http\Controllers\CetakController::class, 'siswa'])->name('print.siswa');
 });
+Route::middleware(['auth', 'role:admin|kesiswaan|bk'])->group(function () {
+    Route::get('penanganan', App\Http\Livewire\Penanganan::class)->name('penanganan');
+});
 Route::middleware(['auth', 'role:admin|kesiswaan'])->group(function () {
     Route::get('penguranganpoin', App\Http\Livewire\PenguranganPoin::class)->name('penguranganpoin');
     Route::get('kenaikankelas', App\Http\Livewire\KenaikanKelas::class)->name('kenaikankelas');

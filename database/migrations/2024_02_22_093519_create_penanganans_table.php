@@ -22,7 +22,7 @@ class CreatePenanganansTable extends Migration
             $table->text('tindak_lanjut');
             $table->text('hasil');
             $table->text('pihak_terlibat');
-            $table->string('dokumentasi');
+            $table->string('dokumentasi')->nullable();
             $table->timestamps();
         });
     }

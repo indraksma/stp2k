@@ -97,6 +97,15 @@
                                 <p>Data Siswa</p>
                             </a>
                         </li>
+                        @if (Auth::user()->hasRole('admin') || Auth::user()->hasRole('kesiswaan') || Auth::user()->hasRole('bk'))
+                            <li class="nav-item">
+                                <a href="{{ route('penanganan') }}"
+                                    class="{{ request()->routeIs('penanganan') ? 'nav-link active' : 'nav-link' }}">
+                                    <i class="nav-icon fas fa-user-check"></i>
+                                    <p>Penanganan Siswa</p>
+                                </a>
+                            </li>
+                        @endif
                         @if (Auth::user()->hasRole('admin') || Auth::user()->hasRole('kesiswaan'))
                             <li class="nav-item">
                                 <a href="{{ route('penguranganpoin') }}"

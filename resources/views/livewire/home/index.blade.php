@@ -72,35 +72,39 @@
                                 @if ($siswa)
                                     @php $i = 1; @endphp
                                     @foreach ($siswa as $datas)
-                                        <tr>
-                                            <td>{{ $i }}</td>
-                                            <td>{{ $datas->nama }}</td>
-                                            <td>{{ $datas->nama_kelas }}</td>
-                                            <td>
-                                                <h4>
-                                                    <span class="badge bg-warning">{{ $datas->poin_siswa }}</span>
-                                                    @if ($datas->poin_siswa % 25 == 0 || $datas->poin_siswa >= 25)
-                                                        @php
-                                                            $jp = $datas->penanganan->count();
-                                                            $mod = floor($datas->poin_siswa / 25);
-                                                        @endphp
-                                                        &nbsp;|&nbsp;
-                                                        @for ($x = 1; $x <= $mod; $x++)
-                                                            @if ($x == $jp)
-                                                                <span class="badge bg-success"
-                                                                    style="font-size: 11pt;">{{ $x }}</span>
-                                                            @else
-                                                                <span class="badge bg-secondary"
-                                                                    style="font-size: 11pt;">{{ $x }}</span>
-                                                            @endif
-                                                        @endfor
-                                                    @endif
-                                                </h4>
-                                            </td>
-                                            <td><button wire:click="detail({{ $datas->id }})" data-toggle="modal"
-                                                    data-target="#modalRiwayat" class="btn btn-sm btn-primary"><i
-                                                        class="fas fa-eye"></i></button>
-                                            </td>
+                                        @if ($datas->poin_siswa % 25 == 0 || $datas->poin_siswa >= 25)
+                                            <tr class="bg-danger">
+                                            @else
+                                            <tr>
+                                        @endif
+                                        <td>{{ $i }}</td>
+                                        <td>{{ $datas->nama }}</td>
+                                        <td>{{ $datas->nama_kelas }}</td>
+                                        <td>
+                                            <h4>
+                                                <span class="badge bg-warning">{{ $datas->poin_siswa }}</span>
+                                                @if ($datas->poin_siswa % 25 == 0 || $datas->poin_siswa >= 25)
+                                                    @php
+                                                        $jp = $datas->penanganan->count();
+                                                        $mod = floor($datas->poin_siswa / 25);
+                                                    @endphp
+                                                    &nbsp;|&nbsp;
+                                                    @for ($x = 1; $x <= $mod; $x++)
+                                                        @if ($x == $jp)
+                                                            <span class="badge bg-success"
+                                                                style="font-size: 11pt;">{{ $x }}</span>
+                                                        @else
+                                                            <span class="badge bg-secondary"
+                                                                style="font-size: 11pt;">{{ $x }}</span>
+                                                        @endif
+                                                    @endfor
+                                                @endif
+                                            </h4>
+                                        </td>
+                                        <td><button wire:click="detail({{ $datas->id }})" data-toggle="modal"
+                                                data-target="#modalRiwayat" class="btn btn-sm btn-primary"><i
+                                                    class="fas fa-eye"></i></button>
+                                        </td>
                                         </tr>
                                         @php $i++; @endphp
                                     @endforeach

@@ -98,15 +98,17 @@ class AddPoin extends Component
     public function updatedSiswaId()
     {
         $siswa = Siswa::find($this->siswa_id);
-        $this->nis = $siswa->nis;
-        if ($siswa->poin_siswa == NULL || $siswa->poin_siswa == "") {
-            $this->poin_siswa = 0;
-        } else {
-            $this->poin_siswa = $siswa->poin_siswa;
+        if ($siswa) {
+            $this->nis = $siswa->nis;
+            if ($siswa->poin_siswa == NULL || $siswa->poin_siswa == "") {
+                $this->poin_siswa = 0;
+            } else {
+                $this->poin_siswa = $siswa->poin_siswa;
+            }
+            $this->jk = $siswa->jk;
+            $this->cekRiwayat();
+            $this->checkForm();
         }
-        $this->jk = $siswa->jk;
-        $this->cekRiwayat();
-        $this->checkForm();
     }
 
     public function updatedJpId()

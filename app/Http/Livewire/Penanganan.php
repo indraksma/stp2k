@@ -126,7 +126,7 @@ class Penanganan extends Component
 
     private function resetForm()
     {
-        $this->reset(['jurusan_id', 'siswa_id', 'kelas_id', 'poin_siswa', 'keterangan', 'jk', 'nis', 'kelas_list', 'siswa_list']);
+        $this->reset(['jurusan_id', 'siswa_id', 'kelas_id', 'poin_siswa', 'permasalahan', 'hasil', 'tl', 'pihakterlibat', 'dokumentasi', 'jk', 'nis', 'kelas_list', 'siswa_list']);
     }
 
     public function closeModal()

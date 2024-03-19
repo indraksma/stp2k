@@ -65,7 +65,6 @@
                                     <th>Nama</th>
                                     <th>Kelas</th>
                                     <th>Poin Pelanggaran</th>
-                                    {{-- <th>Penanganan Siswa</th> --}}
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -78,11 +77,26 @@
                                             <td>{{ $datas->nama }}</td>
                                             <td>{{ $datas->nama_kelas }}</td>
                                             <td>
-                                                <h4><span class="badge bg-warning">{{ $datas->poin_siswa }}</span></h4>
+                                                <h4>
+                                                    <span class="badge bg-warning">{{ $datas->poin_siswa }}</span>
+                                                    @if ($datas->poin_siswa % 25 == 0 || $datas->poin_siswa >= 25)
+                                                        @php
+                                                            $jp = $datas->penanganan->count();
+                                                            $mod = floor($datas->poin_siswa / 25);
+                                                        @endphp
+                                                        &nbsp;|&nbsp;
+                                                        @for ($x = 1; $x <= $mod; $x++)
+                                                            @if ($x == $jp)
+                                                                <span class="badge bg-success"
+                                                                    style="font-size: 11pt;">{{ $x }}</span>
+                                                            @else
+                                                                <span class="badge bg-secondary"
+                                                                    style="font-size: 11pt;">{{ $x }}</span>
+                                                            @endif
+                                                        @endfor
+                                                    @endif
+                                                </h4>
                                             </td>
-                                            {{-- <td>
-                                                <h5><span class="badge bg-secondary">-</span></h5>
-                                            </td> --}}
                                             <td><button wire:click="detail({{ $datas->id }})" data-toggle="modal"
                                                     data-target="#modalRiwayat" class="btn btn-sm btn-primary"><i
                                                         class="fas fa-eye"></i></button>
@@ -93,7 +107,7 @@
                                 @endif
                             </tbody>
                         </table>
-                        {{-- Keterangan Penanganan Siswa :
+                        Keterangan Penanganan Siswa :
                         <ul class="mb-0">
                             <li>
                                 1 / 2 / 3 / 4 : Jumlah Poin Siswa Sudah Perlu dilakukan Penanganan ke-1 / 2 / 3 / 4 oleh
@@ -105,7 +119,7 @@
                             <li>
                                 <span class="badge bg-success">1</span> : Sudah Ditangani BK
                             </li>
-                        </ul> --}}
+                        </ul>
                     </div>
                 </div>
             </div>
